@@ -1,0 +1,54 @@
+version: '3'
+services:
+# DocuZen Application
+  docuzen-server:
+    image: rahmanazhar/docuzen:latest
+    restart: unless-stopped
+    ports:
+      # Map internal port to host
+      - 8080:8080
+    environment:
+      # Base url to be used
+      DOCS_BASE_URL: "https://docuzen.hiroshiaki.com"
+      # Set the admin email
+      DOCS_ADMIN_EMAIL_INIT: "admin@docuzen.com"
+      # Set the admin password (in this example: "superSecure")
+      DOCS_ADMIN_PASSWORD_INIT: "$$2a$$05$$PcMNUbJvsk7QHFSfEIDaIOjk1VI9/E7IPjTKx.jkjPxkx2EOKSoPS"
+      # Setup the database connection. "docuzen-db" is the hostname
+      # and "docuzen" is the name of the database the application
+      # will connect to.
+      DATABASE_URL: "jdbc:postgresql://docuzen-db:5432/docuzen"
+      DATABASE_USER: "docuzen_db_user"
+      DATABASE_PASSWORD: "docuzen_db_password"
+      DATABASE_POOL_SIZE: "10"
+    volumes:
+      - ./docs/data:/data
+    networks:
+      - docker-internal
+      - internet
+    depends_on:
+      - docuzen-db
+
+# DB for DocuZen
+  docuzen-db:
+    image: postgres:13.1-alpine
+    restart: unless-stopped
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: "docuzen_db_user"
+      POSTGRES_PASSWORD: "docuzen_db_password"
+      POSTGRES_DB: "docuzen"
+    volumes:
+      - ./docs/db:/var/lib/postgresql/data
+    networks:
+      - docker-internal
+
+networks:
+  # Network without internet access. The db does not need
+  # access to the host network.
+  docker-internal:
+    driver: bridge
+    internal: true
+  internet:
+    driver: bridge
