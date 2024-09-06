@@ -11,6 +11,6 @@ RUN apk add --no-cache \
     libstdc++ 
 ADD pref /root/.config/preferences/com.sismics.docs.importer.pref
 ADD env.sh /
-COPY --from=builder /build/teedy-importer ./
+COPY --from=builder /build/docuzen-importer ./
 
-CMD ["/bin/ash","-c","/env.sh && /teedy-importer -d"]
+CMD ["/bin/ash","-c","/env.sh && /docuzen-importer -d"]

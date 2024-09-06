@@ -24,9 +24,9 @@ const prefs = new preferences('com.sismics.docs.importer',{
 });
 
 // Welcome message
-console.log('Teedy Importer 1.9, https://teedy.io' +
+console.log('DocuZen Importer 1.9, https://docuzen.io' +
   '\n\n' +
-  'This program let you import files from your system to Teedy' +
+  'This program let you import files from your system to DocuZen' +
   '\n');
 
 // Ask for the base URL
@@ -35,7 +35,7 @@ const askBaseUrl = () => {
     {
       type: 'input',
       name: 'baseUrl',
-      message: 'What is the base URL of your Teedy? (eg. https://teedy.mycompany.com)',
+      message: 'What is the base URL of your DocuZen? (eg. https://docuzen.mycompany.com)',
       default: prefs.importer.baseUrl
     }
   ]).then(answers => {
@@ -44,12 +44,12 @@ const askBaseUrl = () => {
 
     // Test base URL
     const spinner = ora({
-      text: 'Checking connection to Teedy',
+      text: 'Checking connection to DocuZen',
       spinner: 'flips'
     }).start();
     request(answers.baseUrl + '/api/app', function (error, response) {
       if (!response || response.statusCode !== 200) {
-        spinner.fail('Connection to Teedy failed: ' + error);
+        spinner.fail('Connection to DocuZen failed: ' + error);
         askBaseUrl();
         return;
       }
@@ -84,7 +84,7 @@ const askCredentials = () => {
 
     // Test credentials
     const spinner = ora({
-      text: 'Checking connection to Teedy',
+      text: 'Checking connection to DocuZen',
       spinner: 'flips'
     }).start();
     request.post({
@@ -244,7 +244,7 @@ const askLang = () => {
     url: prefs.importer.baseUrl + '/api/app',
   }, function (error, response, body) {
     if (error || !response || response.statusCode !== 200) {
-      spinner.fail('Connection to Teedy failed: ' + error);
+      spinner.fail('Connection to DocuZen failed: ' + error);
       askLang();
       return;
     }

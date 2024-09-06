@@ -1,7 +1,7 @@
 {
-  "name": "teedy-importer",
+  "name": "docuzen-importer",
   "version": "1.9.0",
-  "description": "Import files to Teedy",
+  "description": "Import files to DocuZen",
   "bin": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

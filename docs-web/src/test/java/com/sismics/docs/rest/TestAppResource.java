@@ -417,7 +417,7 @@ public class TestAppResource extends BaseJerseyTest {
                         .param("admin_password", "secret")
                         .param("base_dn", "o=TEST")
                         .param("filter", "(&(objectclass=inetOrgPerson)(uid=USERNAME))")
-                        .param("default_email", "devnull@teedy.io")
+                        .param("default_email", "devnull@docuzen.io")
                         .param("default_storage", "100000000")
                 ), JsonObject.class);
         configLdapChanged = true;
@@ -433,7 +433,7 @@ public class TestAppResource extends BaseJerseyTest {
         Assert.assertEquals("secret", json.getString("admin_password"));
         Assert.assertEquals("o=TEST", json.getString("base_dn"));
         Assert.assertEquals("(&(objectclass=inetOrgPerson)(uid=USERNAME))", json.getString("filter"));
-        Assert.assertEquals("devnull@teedy.io", json.getString("default_email"));
+        Assert.assertEquals("devnull@docuzen.io", json.getString("default_email"));
         Assert.assertEquals(100000000L, json.getJsonNumber("default_storage").longValue());
 
         // Login with a LDAP user
@@ -443,7 +443,7 @@ public class TestAppResource extends BaseJerseyTest {
         json = target().path("/user").request()
                 .cookie(TokenBasedSecurityFilter.COOKIE_NAME, ldapTopen)
                 .get(JsonObject.class);
-        Assert.assertEquals("ldap1@teedy.io", json.getString("email"));
+        Assert.assertEquals("ldap1@docuzen.io", json.getString("email"));
 
         // List all documents
         json = target().path("/document/list")

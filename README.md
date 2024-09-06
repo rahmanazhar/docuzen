@@ -1,11 +1,11 @@
 <h3 align="center">
-  <img src="https://teedy.io/img/github-title.png" alt="Teedy" width=500 />
+  <img src="https://docuzen.io/img/github-title.png" alt="DocuZen" width=500 />
 </h3>
 
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 [![Maven CI/CD](https://github.com/sismics/docs/actions/workflows/build-deploy.yml/badge.svg)](https://github.com/sismics/docs/actions/workflows/build-deploy.yml)
 
-Teedy is an open source, lightweight document management system for individuals and businesses.
+DocuZen is an open source, lightweight document management system for individuals and businesses.
 
 <hr />
 <h2 align="center">
@@ -13,11 +13,11 @@ Teedy is an open source, lightweight document management system for individuals 
 </h2>
 <hr />
 
-![New!](https://teedy.io/img/laptop-demo.png?20180301)
+![New!](https://docuzen.io/img/laptop-demo.png?20180301)
 
 # Demo
 
-A demo is available at [demo.teedy.io](https://demo.teedy.io)
+A demo is available at [demo.docuzen.io](https://demo.docuzen.io)
 
 - Guest login is enabled with read access on all documents
 - "admin" login with "admin" password
@@ -64,7 +64,7 @@ A preconfigured Docker image is available, including OCR and media conversion to
 
 The data directory is `/data`. Don't forget to mount a volume on it.
 
-To build external URL, the server is expecting a `DOCS_BASE_URL` environment variable (for example https://teedy.mycompany.com)
+To build external URL, the server is expecting a `DOCS_BASE_URL` environment variable (for example https://docuzen.mycompany.com)
 
 ## Available environment variables
 
@@ -88,7 +88,7 @@ To build external URL, the server is expecting a `DOCS_BASE_URL` environment var
     - `eng`, `fra`, `ita`, `deu`, `spa`, `por`, `pol`, `rus`, `ukr`, `ara`, `hin`, `chi_sim`, `chi_tra`, `jpn`, `tha`, `kor`, `nld`, `tur`, `heb`, `hun`, `fin`, `swe`, `lav`, `dan`
 
 - E-Mail
-  - `DOCS_SMTP_HOSTNAME`: Hostname of the SMTP-Server to be used by Teedy.
+  - `DOCS_SMTP_HOSTNAME`: Hostname of the SMTP-Server to be used by DocuZen.
   - `DOCS_SMTP_PORT`: The port which should be used.
   - `DOCS_SMTP_USERNAME`: The username to be used.
   - `DOCS_SMTP_PASSWORD`: The password to be used.
@@ -103,8 +103,8 @@ In the following examples some passwords are exposed in cleartext. This was done
 ```yaml
 version: '3'
 services:
-# Teedy Application
-  teedy-server:
+# DocuZen Application
+  docuzen-server:
     image: sismics/docs:v1.11
     restart: unless-stopped
     ports:
@@ -117,10 +117,10 @@ services:
       DOCS_ADMIN_EMAIL_INIT: "admin@example.com"
       # Set the admin password (in this example: "superSecure")
       DOCS_ADMIN_PASSWORD_INIT: "$$2a$$05$$PcMNUbJvsk7QHFSfEIDaIOjk1VI9/E7IPjTKx.jkjPxkx2EOKSoPS"
-      # Setup the database connection. "teedy-db" is the hostname
-      # and "teedy" is the name of the database the application
+      # Setup the database connection. "docuzen-db" is the hostname
+      # and "docuzen" is the name of the database the application
       # will connect to.
-      DATABASE_URL: "jdbc:postgresql://teedy-db:5432/teedy"
+      DATABASE_URL: "jdbc:postgresql://docuzen-db:5432/docuzen"
       DATABASE_USER: "teedy_db_user"
       DATABASE_PASSWORD: "teedy_db_password"
       DATABASE_POOL_SIZE: "10"
@@ -130,10 +130,10 @@ services:
       - docker-internal
       - internet
     depends_on:
-      - teedy-db
+      - docuzen-db
 
-# DB for Teedy
-  teedy-db:
+# DB for DocuZen
+  docuzen-db:
     image: postgres:13.1-alpine
     restart: unless-stopped
     expose:
@@ -141,7 +141,7 @@ services:
     environment:
       POSTGRES_USER: "teedy_db_user"
       POSTGRES_PASSWORD: "teedy_db_password"
-      POSTGRES_DB: "teedy"
+      POSTGRES_DB: "docuzen"
     volumes:
       - ./docs/db:/var/lib/postgresql/data
     networks:
@@ -162,8 +162,8 @@ networks:
 ```yaml
 version: '3'
 services:
-# Teedy Application
-  teedy-server:
+# DocuZen Application
+  docuzen-server:
     image: sismics/docs:v1.11
     restart: unless-stopped
     ports:
@@ -195,11 +195,11 @@ services:
 The latest release is downloadable here: <https://github.com/sismics/docs/releases> in WAR format. 
 **The default admin password is "admin". Don't forget to change it before going to production.**
 
-## How to build Teedy from the sources
+## How to build DocuZen from the sources
 
 Prerequisites: JDK 11, Maven 3, NPM, Grunt, Tesseract 4
 
-Teedy is organized in several Maven modules:
+DocuZen is organized in several Maven modules:
 
 - docs-core
 - docs-web
@@ -242,5 +242,5 @@ The `master` branch is the default and base branch for the project. It is used f
 
 # License
 
-Teedy is released under the terms of the GPL license. See `COPYING` for more
+DocuZen is released under the terms of the GPL license. See `COPYING` for more
 information or see <http://opensource.org/licenses/GPL-2.0>.

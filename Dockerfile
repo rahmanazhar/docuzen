@@ -1,5 +1,5 @@
 FROM ubuntu:22.04
-LABEL maintainer="b.gamard@sismics.com"
+LABEL maintainer="rahmanprojectd@gmail.com"
 
 # Run Debian in non interactive mode
 ENV DEBIAN_FRONTEND noninteractive

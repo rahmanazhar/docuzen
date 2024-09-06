@@ -1,15 +1,15 @@
 version: '3'
 services:
-# Teedy Application
-  teedy-server:
-    image: sismics/docs:v1.10
+# DocuZen Application
+  docuzen-server:
+    image: rahmanazhar/docuzen:latest
     restart: unless-stopped
     ports:
       # Map internal port to host
       - 8080:8080
     environment:
       # Base url to be used
-      DOCS_BASE_URL: "https://docs.example.com"
+      DOCS_BASE_URL: "https://docuzen.hiroshiaki.com"
       # Set the admin email
       DOCS_ADMIN_EMAIL_INIT: "admin@example.com"
       # Set the admin password (in this example: "superSecure")
