@@ -234,6 +234,8 @@ mvn -Pprod -DskipTests clean install
 
 You will get your deployable WAR in the `docs-web/target` directory.
 
+docker buildx --platform linux/amd64 --pull --rm -f "Dockerfile" -t rahmanazhar/docuzen:latest "." 
+
 # Contributing
 
 All contributions are more than welcomed. Contributions may close an issue, fix a bug (reported or not reported), improve the existing code, add new feature, and so on.
